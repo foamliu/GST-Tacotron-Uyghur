@@ -10,5 +10,5 @@ def extract(filename):
 
 
 if __name__ == "__main__":
-    if not os.path.isdir('data/data_aishell'):
-        extract('data/data_aishell.tgz')
+    if not os.path.isdir('data/data_thuyg20'):
+        extract('data/data_thuyg20.tar.gz')
