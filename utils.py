@@ -149,9 +149,9 @@ def load_wav_to_torch(full_path):
     return torch.FloatTensor(yt.astype(np.float32)), sr
 
 
-def load_filepaths_and_text(filename, split="|"):
+def load_filepaths_and_text(filename, split=" "):
     with open(filename, encoding='utf-8') as f:
-        filepaths_and_text = [line.strip().split(split) for line in f]
+        filepaths_and_text = [line.strip().split(split, 2) for line in f]
     return filepaths_and_text
 
 
@@ -218,8 +218,7 @@ class Denoiser(torch.nn.Module):
 
 def test(model, step_num, loss, get_mel):
     model.eval()
-    text = "相对论直接和间接的催生了量子力学的诞生"
-    text = pinyin.get(text, format="numerical", delimiter=" ")
+    text = "vikki miN birinci yili toqquzinci vaydin buyan zuNtuN box diqqitini terrorluqqa qarxi vurux mAsilisigila mArkAzlAxtUrUp kAldi"
     sequence = np.array(text_to_sequence(text))[None, :]
     sequence = torch.autograd.Variable(torch.from_numpy(sequence)).cuda().long()
 
