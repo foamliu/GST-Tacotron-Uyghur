@@ -1,6 +1,5 @@
 import argparse
 import logging
-import os
 
 import cv2 as cv
 import librosa
@@ -8,7 +7,7 @@ import matplotlib.pylab as plt
 import numpy as np
 import torch
 
-from config import thuyg20_folder, sampling_rate, char_to_idx, idx_to_char, ref_wav
+from config import sampling_rate, char_to_idx, idx_to_char, ref_wav
 from models.layers import STFT
 
 
