@@ -18,7 +18,6 @@ unk_id = 0
 thuyg20_folder = 'data/data_thuyg20'
 wav_folder = os.path.join(thuyg20_folder, 'data')
 tran_file_format = 'data/trans/trans.{}'
-data_file = 'data/data_aishell.pkl'
 
 ################################
 # Experiment Parameters        #
