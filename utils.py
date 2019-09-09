@@ -1,14 +1,14 @@
 import argparse
 import logging
+import os
 
 import cv2 as cv
 import librosa
 import matplotlib.pylab as plt
 import numpy as np
-import pinyin
 import torch
 
-from config import sampling_rate, char_to_idx, idx_to_char, ref_wav
+from config import thuyg20_folder, sampling_rate, char_to_idx, idx_to_char, ref_wav
 from models.layers import STFT
 
 
@@ -142,7 +142,7 @@ def normalize(yt):
 
 
 def load_wav_to_torch(full_path):
-    # sampling_rate, data = read(full_path)
+    full_path = os.path.join(thuyg20_folder, full_path)
     y, sr = librosa.load(full_path, sampling_rate)
     yt, _ = librosa.effects.trim(y, top_db=20)
     yt = normalize(yt)
