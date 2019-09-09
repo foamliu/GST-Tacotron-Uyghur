@@ -18,6 +18,7 @@ class TextMelLoader(torch.utils.data.Dataset):
 
     def __init__(self, split, hparams):
         audiopaths_and_text = hp.tran_file_format.format(split)  # train, cv & test
+        print(audiopaths_and_text)
         self.audiopaths_and_text = load_filepaths_and_text(audiopaths_and_text)
         self.samples = data[split]
         self.sampling_rate = hparams.sampling_rate
