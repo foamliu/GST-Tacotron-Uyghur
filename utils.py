@@ -81,7 +81,7 @@ def accuracy(scores, targets, k=1):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Tacotron2')
+    parser = argparse.ArgumentParser(description='GST-Tacotron')
     parser.add_argument('--epochs', default=10000, type=int)
     parser.add_argument('--max_norm', default=1, type=float, help='Gradient norm threshold to clip')
     # minibatch
