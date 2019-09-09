@@ -142,7 +142,6 @@ def normalize(yt):
 
 
 def load_wav_to_torch(full_path):
-    full_path = os.path.join(thuyg20_folder, full_path)
     y, sr = librosa.load(full_path, sampling_rate)
     yt, _ = librosa.effects.trim(y, top_db=20)
     yt = normalize(yt)

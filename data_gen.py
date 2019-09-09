@@ -37,6 +37,7 @@ class TextMelLoader(torch.utils.data.Dataset):
         return (text, mel)
 
     def get_mel(self, filename):
+        filename = os.path.join(hp.thuyg20_folder, filename)
         audio, sampling_rate = load_wav_to_torch(filename)
         assert (sampling_rate == self.stft.sampling_rate)
         audio_norm = audio.unsqueeze(0)
