@@ -4,20 +4,20 @@ import torch
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')  # sets device for model and PyTorch tensors
 
-num_train = 120098
-num_dev = 14326
-num_test = 7176
+num_train = 7600
+num_cv = 400
+num_test = 1468
 
-vocab = 'abcdefghijklmnopqrstuvwxyz12345 '
+vocab = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ '
 vocab_size = len(vocab)
 idx_to_char = {i: vocab[i] for i in range(0, len(vocab))}
 char_to_idx = {vocab[i]: i for i in range(0, len(vocab))}
 
 unk_id = 0
 
-aishell_folder = 'data/data_aishell'
-wav_folder = os.path.join(aishell_folder, 'wav')
-tran_file = os.path.join(aishell_folder, 'transcript/aishell_transcript_v0.8.txt')
+thuyg20_folder = 'data/data_thuyg20'
+wav_folder = os.path.join(thuyg20_folder, 'data')
+tran_file_format = 'data/trans/trans.{}'
 data_file = 'data/data_aishell.pkl'
 
 ################################

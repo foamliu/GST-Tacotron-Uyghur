@@ -1,13 +1,12 @@
-import pickle
 import random
 
 import numpy as np
 import torch
 import torch.utils.data
 
-from config import data_file
+import config as hp
 from models import layers
-from utils import load_wav_to_torch, text_to_sequence
+from utils import load_wav_to_torch, text_to_sequence, load_filepaths_and_text
 
 
 class TextMelLoader(torch.utils.data.Dataset):
@@ -18,8 +17,8 @@ class TextMelLoader(torch.utils.data.Dataset):
     """
 
     def __init__(self, split, hparams):
-        with open(data_file, 'rb') as file:
-            data = pickle.load(file)
+        audiopaths_and_text = hp.tran_file_format.format(split)  # train, cv & test
+        self.audiopaths_and_text = load_filepaths_and_text(audiopaths_and_text)
         self.samples = data[split]
         self.sampling_rate = hparams.sampling_rate
         self.load_mel_from_disk = hparams.load_mel_from_disk
@@ -30,9 +29,9 @@ class TextMelLoader(torch.utils.data.Dataset):
         random.seed(1234)
         random.shuffle(self.samples)
 
-    def get_mel_text_pair(self, sample):
+    def get_mel_text_pair(self, audiopath_and_text):
         # separate filename and text
-        audiopath, text = sample['audiopath'], sample['text']
+        audiopath, text = audiopath_and_text[0], audiopath_and_text[1]
         text = self.get_text(text)
         mel = self.get_mel(audiopath)
         return (text, mel)
