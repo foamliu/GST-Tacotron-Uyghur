@@ -20,7 +20,6 @@ class TextMelLoader(torch.utils.data.Dataset):
         audiopaths_and_text = hp.tran_file_format.format(split)  # train, cv & test
         print(audiopaths_and_text)
         self.audiopaths_and_text = load_filepaths_and_text(audiopaths_and_text)
-        self.samples = data[split]
         self.sampling_rate = hparams.sampling_rate
         self.load_mel_from_disk = hparams.load_mel_from_disk
         self.stft = layers.TacotronSTFT(
@@ -28,7 +27,7 @@ class TextMelLoader(torch.utils.data.Dataset):
             hparams.n_mel_channels, hparams.sampling_rate, hparams.mel_fmin,
             hparams.mel_fmax)
         random.seed(1234)
-        random.shuffle(self.samples)
+        random.shuffle(self.audiopaths_and_text)
 
     def get_mel_text_pair(self, audiopath_and_text):
         # separate filename and text
@@ -54,10 +53,10 @@ class TextMelLoader(torch.utils.data.Dataset):
         return text_norm
 
     def __getitem__(self, index):
-        return self.get_mel_text_pair(self.samples[index])
+        return self.get_mel_text_pair(self.audiopaths_and_text[index])
 
     def __len__(self):
-        return len(self.samples)
+        return len(self.audiopaths_and_text)
 
 
 class TextMelCollate:
